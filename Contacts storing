@@ -1,0 +1,94 @@
+# Enhanced Contact Book System
+
+contacts = []
+
+while True:
+
+    print("\n------ CONTACT BOOK ------")
+    print("1. Add Contact")
+    print("2. View Contacts")
+    print("3. Search Contact")
+    print("4. Update Contact")
+    print("5. Delete Contact")
+    print("6. Sort Contacts")
+    print("7. Exit")
+
+    choice = input("Enter your choice: ")
+
+    # Add Contact
+    if choice == "1":
+        name = input("Enter name: ").title()
+        phone = input("Enter phone number: ")
+
+        duplicate = False
+        for contact in contacts:
+            if contact[1] == phone:
+                duplicate = True
+
+        if duplicate:
+            print("Phone number already exists!")
+        else:
+            contacts.append([name, phone])
+            print("Contact added successfully")
+
+    # view contacts
+    elif choice == "2":
+        if len(contacts) == 0:
+            print("No contacts found")
+        else:
+            print("\nContact List:")
+            for contact in contacts:
+                print("Name:", contact[0], "| Phone:", contact[1])
+
+    # serch Contact
+    elif choice == "3":
+        search = input("Enter name to search: ").title()
+        found = False
+
+        for contact in contacts:
+            if contact[0] == search:
+                print("Contact Found")
+                print("Name:", contact[0])
+                print("Phone:", contact[1])
+                found = True
+
+        if not found:
+            print("Contact not found")
+
+    # Update Contact
+    elif choice == "4":
+        name = input("Enter name to update: ").title()
+
+        for contact in contacts:
+            if contact[0] == name:
+                new_phone = input("Enter new phone number: ")
+                contact[1] = new_phone
+                print("Contact updated successfully")
+                break
+        else:
+            print("Contact not found")
+
+    # delete Contact
+    elif choice == "5":
+        name = input("Enter name to delete: ").title()
+
+        for contact in contacts:
+            if contact[0] == name:
+                contacts.remove(contact)
+                print("Contact deleted successfully")
+                break
+        else:
+            print("Contact not found")
+
+    # sort Contacts
+    elif choice == "6":
+        contacts.sort()
+        print("Contacts sorted alphabetically")
+
+    # Exit
+    elif choice == "7":
+        print("Exiting Contact Book")
+        break
+
+    else:
+        print("Invalid choice")
